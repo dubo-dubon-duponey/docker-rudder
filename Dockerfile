@@ -92,7 +92,7 @@ WORKDIR       $GOPATH/src/$GIT_REPO/utils/config-gen
 RUN           npm install
 RUN           yarn build
 RUN           mkdir -p /dist/boot/bin
-RUN           mv $GOPATH/src/$GIT_REPO/utils/config-gen/build /dist/boot/bin/configurator
+RUN           mv "$GOPATH/src/$GIT_REPO/utils/config-gen/build" /dist/boot/bin/configurator
 
 
 # XXX to start:
