@@ -2,10 +2,10 @@
 set -o errexit -o errtrace -o functrace -o nounset -o pipefail
 
 # Ensure the data folder is writable
-[ -w "/data" ] || {
-  >&2 printf "/data is not writable. Check your mount permissions.\n"
-  exit 1
-}
+#[ -w "/tmp" ] || {
+#  >&2 printf "/tmp is not writable. Check your mount permissions.\n"
+#  exit 1
+#}
 
 # System constants
 export RSERVER_GATEWAY_WEB_PORT="${PORT:-}"
@@ -13,12 +13,12 @@ export RSERVER_GATEWAY_WEB_PORT="${PORT:-}"
 LOG_LEVEL="$(printf "%s" "${LOG_LEVEL:-info}" | tr '[:lower:]' '[:upper:]')"
 export LOG_LEVEL
 
-if [ "${USERNAME:-}" ]; then
-  export REGISTRY_AUTH=htpasswd
-  export REGISTRY_AUTH_HTPASSWD_REALM="$REALM"
-  export REGISTRY_AUTH_HTPASSWD_PATH=/data/htpasswd
-  printf "%s:%s\n" "$USERNAME" "$(printf "%s" "$PASSWORD" | base64 -d)" > /data/htpasswd
-fi
+#if [ "${USERNAME:-}" ]; then
+#  export REGISTRY_AUTH=htpasswd
+#  export REGISTRY_AUTH_HTPASSWD_REALM="$REALM"
+#  export REGISTRY_AUTH_HTPASSWD_PATH=/data/htpasswd
+#  printf "%s:%s\n" "$USERNAME" "$(printf "%s" "$PASSWORD" | base64 -d)" > /data/htpasswd
+#fi
 
 # args=()
 

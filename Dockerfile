@@ -140,7 +140,8 @@ COPY          --from=builder-assembly-server --chown=$BUILD_UID:root /dist .
 
 EXPOSE        5000
 
-VOLUME        /data
+# VOLUME        /data
+VOLUME        /tmp
 
 # mDNS
 ENV           MDNS_NAME=""
