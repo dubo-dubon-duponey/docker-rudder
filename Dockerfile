@@ -39,9 +39,9 @@ RUN           env GOOS=linux GOARCH="$(printf "%s" "$TARGETPLATFORM" | sed -E 's
 # hadolint ignore=DL3006
 FROM          --platform=$BUILDPLATFORM $BUILDER_BASE                                                                   AS builder-caddy
 
-# This is 2.1.1+ with golang 1.15 support (08/21/2020)
+# This is 2.2.1 (11/16/2020)
 ARG           GIT_REPO=github.com/caddyserver/caddy
-ARG           GIT_VERSION=0279a57ac465b2920abf71d86203d9feac2015b5
+ARG           GIT_VERSION=385adf5d878939c381c7f73c771771d34523a1a7
 
 WORKDIR       $GOPATH/src/$GIT_REPO
 RUN           git clone https://$GIT_REPO .
@@ -58,8 +58,11 @@ RUN           env GOOS=linux GOARCH="$(printf "%s" "$TARGETPLATFORM" | sed -E 's
 # hadolint ignore=DL3006
 FROM          --platform=$BUILDPLATFORM $BUILDER_BASE                                                                   AS builder-main-rudder
 
+# October 1st, 2020
+#ARG           GIT_VERSION=1d34d04e6b2ac6ae026f349f5504712acb3e891b
+# November 5, 2020
 ARG           GIT_REPO=github.com/rudderlabs/rudder-server
-ARG           GIT_VERSION=1d34d04e6b2ac6ae026f349f5504712acb3e891b
+ARG           GIT_VERSION=6b0707ff7ab2c384adacdb7d59e8c7a6cbc77828
 
 WORKDIR       $GOPATH/src/$GIT_REPO
 RUN           git clone git://$GIT_REPO .
@@ -82,8 +85,11 @@ RUN           mkdir -p /tmp/.npm-global
 ENV           PATH=/tmp/.npm-global/bin:$PATH
 ENV           NPM_CONFIG_PREFIX=/tmp/.npm-global
 
+# October 1st, 2020
+#ARG           GIT_VERSION=1d34d04e6b2ac6ae026f349f5504712acb3e891b
+# November 5, 2020
 ARG           GIT_REPO=github.com/rudderlabs/rudder-server
-ARG           GIT_VERSION=1d34d04e6b2ac6ae026f349f5504712acb3e891b
+ARG           GIT_VERSION=6b0707ff7ab2c384adacdb7d59e8c7a6cbc77828
 
 WORKDIR       $GOPATH/src/$GIT_REPO
 RUN           git clone git://$GIT_REPO .
