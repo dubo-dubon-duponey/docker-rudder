@@ -11,6 +11,13 @@ import (
 	icing: #Icing
 	hosts: types.#Hosts // [string]: string
 
+	// XXX this is really not quite right, but short term, icing injects into recipe, if the recipe defines an image output
+	// very ghetto, and no better idea at that time
+	// icing should really be a set of properties of the oven, applied to all cakes, let's start with that
+	if icing.output.registries != _|_ if recipe.output.images != _|_ {
+		recipe: output: images: registries: icing.output.registries
+	}
+
 	// XXXWIP
 	// injector: #Injector
 	//for _k, _v in injector {
@@ -23,12 +30,14 @@ import (
 
 	// Connect the image definitions into buildkit (XXX and inject overrides?)
 	_buildkit: {
-		addr: icing.buildkit.address
+		if icing.buildkit.address != _|_ {
+			addr: icing.buildkit.address
+		}
 		tls: {
-			name : icing.buildkit.name
-			ca : icing.buildkit.ca
-			key : icing.buildkit.key
-			cert : icing.buildkit.cert
+			name: icing.buildkit.name
+			ca: icing.buildkit.ca
+			key: icing.buildkit.key
+			cert: icing.buildkit.cert
 		}
 		// XXX this does not work as expected, and is one of the most aggravating things about cue - the inability to have cascading defaults resolve to something (especially with @tags)
 		// If no context was provided at all, default to ./context for buildkit - this means that none of the scullery tooling can operate safely on the value of the context - fine
